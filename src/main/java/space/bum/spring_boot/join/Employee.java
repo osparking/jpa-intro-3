@@ -24,6 +24,9 @@ public class Employee {
   @ManyToOne
   private Department department;
 
+  /**
+   * 한 직원은 전화번호를 여러개 가질 수 있다.
+   */
   @OneToMany(mappedBy = "employee")
   private List<Phone> phones;
 }
