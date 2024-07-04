@@ -34,5 +34,13 @@ class UserJpqlRepoTest {
     var userRead = userJpqlRepo.getUserByIdWithTypedQuery(id);
     assertEquals(id, userRead.getId());
   }
+  
+  @Test
+  void testGetUserByIdWithNamedQuery() {
+    userRepository.save(new UserEntity(id, "이"));
+    
+    var userRead = userJpqlRepo.getUserByIdWithNamedQuery(id);
+    assertEquals(id, userRead.getId());
+  }
 
 }
