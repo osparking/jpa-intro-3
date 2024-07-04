@@ -37,4 +37,11 @@ public class UserJpqlRepo {
     namedQuery.setParameter("userId", id);
     return (UserEntity) namedQuery.getSingleResult();
   }
+
+  public UserEntity getUserByIdWithNativeQuery(Long id) {
+    Query nativeQuery = entityManager.createNativeQuery(
+        "SELECT * FROM users WHERE id=:userId", UserEntity.class);
+    nativeQuery.setParameter("userId", id);
+    return (UserEntity) nativeQuery.getSingleResult();
+  }
 }
