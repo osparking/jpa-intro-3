@@ -30,4 +30,11 @@ public class UserJpqlRepo {
     typedQuery.setParameter("id", id);
     return typedQuery.getSingleResult();
   }
+
+  public UserEntity getUserByIdWithNamedQuery(Long id) {
+    Query namedQuery = entityManager
+        .createNamedQuery("UserEntity.findByUserId");
+    namedQuery.setParameter("userId", id);
+    return (UserEntity) namedQuery.getSingleResult();
+  }
 }
