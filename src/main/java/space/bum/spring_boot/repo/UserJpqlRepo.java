@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import lombok.Data;
 import space.bum.spring_boot.jpaQ.UserEntity;
 
@@ -43,5 +46,17 @@ public class UserJpqlRepo {
         "SELECT * FROM users WHERE id=:userId", UserEntity.class);
     nativeQuery.setParameter("userId", id);
     return (UserEntity) nativeQuery.getSingleResult();
+  }
+
+  public UserEntity getUserByIdWithCriteriaQuery(Long id) {
+    CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+    CriteriaQuery<UserEntity> criteriaQuery = criteriaBuilder
+        .createQuery(UserEntity.class);
+    Root<UserEntity> userRoot = criteriaQuery.from(UserEntity.class);
+    UserEntity queryResult = getEntityManager()
+        .createQuery(criteriaQuery.select(userRoot)
+            .where(criteriaBuilder.equal(userRoot.get("id"), id)))
+        .getSingleResult();
+    return queryResult;
   }
 }

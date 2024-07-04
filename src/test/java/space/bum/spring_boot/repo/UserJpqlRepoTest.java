@@ -54,5 +54,11 @@ class UserJpqlRepoTest {
     var userRead = userJpqlRepo.getUserByIdWithNativeQuery(id);
     assertEquals(id, userRead.getId());
   }
+  
+  @Test
+  void testGetUserByIdWithCriteriaQuery() {
+    var userRead = userJpqlRepo.getUserByIdWithCriteriaQuery(id);
+    assertEquals(id, userRead.getId());
+  }
 
 }
