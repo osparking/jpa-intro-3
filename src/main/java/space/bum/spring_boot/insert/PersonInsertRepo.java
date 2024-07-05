@@ -21,4 +21,9 @@ public class PersonInsertRepo {
         .setParameter(3, person.getLastName())
         .executeUpdate();
   }
+  
+  @Transactional
+  public void insertWithEntityManager(Person person) {
+      this.entityManager.persist(person);
+  }
 }
