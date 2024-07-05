@@ -21,4 +21,13 @@ class PersonInsertRepoTest {
       personInsertRepo.insertWithQuery(person);
     });
   }
+
+  @Test
+  public void givenPersonEntity_whenInsertedTwice_thenExceptionExpected() {
+    Person person = new Person(1L, "firstname", "lastname");
+    assertThrows(DataIntegrityViolationException.class, () -> {
+      personInsertRepo.insertWithEntityManager(person);
+      personInsertRepo.insertWithEntityManager(person);
+    });
+  }
 }
