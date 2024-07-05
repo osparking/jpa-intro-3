@@ -38,11 +38,22 @@ class JoinTest {
     employee.setAge(35);
     employee.setDepartment(department);
     joinRepository.insertWithEntityManager(employee);
-
+    
     Phone phone = new Phone();
     phone.setNumber("010-1111-2222");
     phone.setEmployee(employee);
     joinRepository.insertWithEntityManager(phone);
+    
+    Employee employee2 = new Employee();
+    employee2.setName("임꺽정");
+    employee2.setAge(41);
+    employee2.setDepartment(department);
+    joinRepository.insertWithEntityManager(employee2);
+
+    Phone phone2 = new Phone();
+    phone2.setNumber("010-3333-4444");
+    phone2.setEmployee(employee2);
+    joinRepository.insertWithEntityManager(phone2);
   }
 
   @Test
@@ -66,6 +77,6 @@ class JoinTest {
     TypedQuery<Phone> query = entityManager.createQuery(
         "SELECT e.phones FROM Employee e", Phone.class);
     List<Phone> resultList = query.getResultList();
-    assertEquals(1, resultList.size());
+    assertEquals(2, resultList.size());
   }
 }
