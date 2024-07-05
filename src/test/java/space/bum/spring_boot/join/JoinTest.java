@@ -29,10 +29,6 @@ class JoinTest {
   @BeforeEach
   @Transactional
   void setUp() throws Exception {
-    Phone phone = new Phone();
-    phone.setNumber("010-1111-2222");
-    joinRepository.insertWithEntityManager(phone);
-
     Department department = new Department();
     department.setName("로봇설계과");
     joinRepository.insertWithEntityManager(department);
@@ -41,10 +37,12 @@ class JoinTest {
     employee.setName("홍길동");
     employee.setAge(35);
     employee.setDepartment(department);
-    List<Phone> phones = new ArrayList<>();
-    phones.add(phone);
-    employee.setPhones(phones);
     joinRepository.insertWithEntityManager(employee);
+
+    Phone phone = new Phone();
+    phone.setNumber("010-1111-2222");
+    phone.setEmployee(employee);
+    joinRepository.insertWithEntityManager(phone);
   }
 
   @Test
