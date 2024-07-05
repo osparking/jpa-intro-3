@@ -38,12 +38,12 @@ class JoinTest {
     employee.setAge(35);
     employee.setDepartment(department);
     joinRepository.insertWithEntityManager(employee);
-    
+
     Phone phone = new Phone();
     phone.setNumber("010-1111-2222");
     phone.setEmployee(employee);
     joinRepository.insertWithEntityManager(phone);
-    
+
     Employee employee2 = new Employee();
     employee2.setName("임꺽정");
     employee2.setAge(41);
@@ -76,6 +76,15 @@ class JoinTest {
   public void whenCollecValueAssocSpecifiedInSelect_ThenReturnsCollections() {
     TypedQuery<Phone> query = entityManager.createQuery(
         "SELECT e.phones FROM Employee e", Phone.class);
+    List<Phone> resultList = query.getResultList();
+    assertEquals(2, resultList.size());
+  }
+
+  @Test
+  public void whenCollectionValuedAssociationIsJoined_ThenCanSelect() {
+    TypedQuery<Phone> query = entityManager.createQuery(
+        "SELECT ph FROM Employee e JOIN e.phones ph",
+        Phone.class);
     List<Phone> resultList = query.getResultList();
     assertEquals(2, resultList.size());
   }
