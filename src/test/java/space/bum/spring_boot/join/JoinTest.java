@@ -57,7 +57,7 @@ class JoinTest {
   @Test
   public void whenJoinKeywordIsUsed_thenCreatesExplicitInnerJoin() {
     TypedQuery<Department> query = entityManager.createQuery(
-        "SELECT d FROM Employee e JOIN e.department d", Department.class);
+        "SELECT d FROM Employee e inner JOIN e.department d", Department.class);
     List<Department> resultList = query.getResultList();
     assertEquals(1, resultList.size());
   }
