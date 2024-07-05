@@ -3,6 +3,7 @@ package space.bum.spring_boot.join;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -59,6 +60,14 @@ class JoinTest {
     TypedQuery<Department> query = entityManager.createQuery(
         "SELECT d FROM Employee e inner JOIN e.department d", Department.class);
     List<Department> resultList = query.getResultList();
+    assertEquals(1, resultList.size());
+  }
+
+  @Test
+  public void whenCollecValueAssocSpecifiedInSelect_ThenReturnsCollections() {
+    TypedQuery<Phone> query = entityManager.createQuery(
+        "SELECT e.phones FROM Employee e", Phone.class);
+    List<Phone> resultList = query.getResultList();
     assertEquals(1, resultList.size());
   }
 }
