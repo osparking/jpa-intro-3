@@ -83,9 +83,9 @@ class JoinTest {
   @Test
   public void whenCollectionValuedAssociationIsJoined_ThenCanSelect() {
     TypedQuery<Phone> query = entityManager.createQuery(
-        "SELECT ph FROM Employee e JOIN e.phones ph",
+        "SELECT ph FROM Employee e JOIN e.phones ph WHERE ph.number LIKE '%11%'",
         Phone.class);
     List<Phone> resultList = query.getResultList();
-    assertEquals(2, resultList.size());
+    assertEquals(1, resultList.size());
   }
 }
