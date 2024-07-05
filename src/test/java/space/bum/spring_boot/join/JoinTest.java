@@ -21,7 +21,7 @@ import jakarta.transaction.Transactional;
 class JoinTest {
   @PersistenceContext
   private EntityManager entityManager;
-  
+
   @Autowired
   private JoinRepository joinRepository;
 
@@ -31,11 +31,11 @@ class JoinTest {
     Phone phone = new Phone();
     phone.setNumber("010-1111-2222");
     joinRepository.insertWithEntityManager(phone);
-    
+
     Department department = new Department();
     department.setName("로봇설계과");
     joinRepository.insertWithEntityManager(department);
-    
+
     Employee employee = new Employee();
     employee.setName("홍길동");
     employee.setAge(35);
@@ -54,4 +54,11 @@ class JoinTest {
     assertEquals(1, resultList.size());
   }
 
+  @Test
+  public void whenJoinKeywordIsUsed_thenCreatesExplicitInnerJoin() {
+    TypedQuery<Department> query = entityManager.createQuery(
+        "SELECT d FROM Employee e JOIN e.department d", Department.class);
+    List<Department> resultList = query.getResultList();
+    assertEquals(1, resultList.size());
+  }
 }
