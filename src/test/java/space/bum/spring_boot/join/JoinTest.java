@@ -32,7 +32,7 @@ class JoinTest {
     Department department1 = new Department();
     department1.setName("판매홍보과");
     joinRepository.insertWithEntityManager(department1);
-    
+
     Department department = new Department();
     department.setName("로봇설계과");
     joinRepository.insertWithEntityManager(department);
@@ -100,5 +100,14 @@ class JoinTest {
         Department.class);
     List<Department> resultList = query.getResultList();
     assertEquals(2, resultList.size());
+  }
+
+  @Test
+  public void whenEntitiesListedInFromAndMatchedInWhere_ThenJoins() {
+    TypedQuery<Department> query = entityManager.createQuery(
+        "SELECT d FROM Employee e, Department d WHERE e.department = d",
+        Department.class);
+    List<Department> resultList = query.getResultList();
+    assertEquals(1, resultList.size());
   }
 }
