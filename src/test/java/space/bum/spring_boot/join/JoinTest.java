@@ -110,4 +110,12 @@ class JoinTest {
     List<Department> resultList = query.getResultList();
     assertEquals(1, resultList.size());
   }
+  
+  @Test
+  public void whenEntitiesAreListedInFrom_ThenCreatesCartesianProduct2() {
+    TypedQuery<Long> query = entityManager.createQuery(
+        "SELECT count(*)d FROM Employee e, Department d", Long.class);
+    Long resultList = query.getSingleResult();
+    assertEquals(4L, resultList);
+  }
 }
