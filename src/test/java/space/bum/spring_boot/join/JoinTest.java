@@ -2,8 +2,6 @@ package space.bum.spring_boot.join;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,9 +14,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
 @EnableTransactionManagement
+@Slf4j
 class JoinTest {
   @PersistenceContext
   private EntityManager entityManager;
@@ -124,6 +124,16 @@ class JoinTest {
     TypedQuery<Employee> query = entityManager.createQuery(
         "SELECT e FROM Employee e, Department d", Employee.class);
     List<Employee> resultList = query.getResultList();
+    assertEquals(2, resultList.size());
+  }
+
+  @Test
+  public void whenMultipleEntitiesListedWithJoin_ThenCreatesMultipleJoins() {
+    TypedQuery<Phone> query = entityManager.createQuery(
+        "SELECT ph FROM Employee e JOIN e.department d "
+            + "JOIN e.phones ph WHERE d.name IS NOT NULL",
+        Phone.class);
+    List<Phone> resultList = query.getResultList();
     assertEquals(2, resultList.size());
   }
 }
