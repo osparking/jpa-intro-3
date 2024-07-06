@@ -58,6 +58,11 @@ class JoinTest {
     phone2.setNumber("010-3333-4444");
     phone2.setEmployee(employee2);
     joinRepository.insertWithEntityManager(phone2);
+    
+    Phone phone3 = new Phone();
+    phone3.setNumber("010-5555-6666");
+    phone3.setEmployee(employee2);
+    joinRepository.insertWithEntityManager(phone3);
   }
 
   @Test
@@ -134,6 +139,6 @@ class JoinTest {
             + "JOIN e.phones ph WHERE d.name IS NOT NULL",
         Phone.class);
     List<Phone> resultList = query.getResultList();
-    assertEquals(2, resultList.size());
+    assertEquals(3, resultList.size());
   }
 }
