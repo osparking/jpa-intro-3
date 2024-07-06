@@ -145,8 +145,17 @@ class JoinTest {
   @Test
   public void whenFetchKeywordIsSpecified_ThenCreatesFetchJoin() {
     TypedQuery<Department> query = entityManager.createQuery(
-        "SELECT d FROM Department d JOIN d.employees", Department.class);
+        "SELECT d FROM Department d JOIN FETCH d.employees", Department.class);
     List<Department> resultList = query.getResultList();
     assertEquals(1, resultList.size());
+  }
+
+  @Test
+  public void whenLeftAndFetchKeywordsAreSpecified_ThenCreatesOuterFetchJoin() {
+    TypedQuery<Department> query = entityManager.createQuery(
+        "SELECT d FROM Department d LEFT JOIN FETCH d.employees",
+        Department.class);
+    List<Department> resultList = query.getResultList();
+    assertEquals(2, resultList.size());
   }
 }
