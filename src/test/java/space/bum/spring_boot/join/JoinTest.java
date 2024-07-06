@@ -58,7 +58,7 @@ class JoinTest {
     phone2.setNumber("010-3333-4444");
     phone2.setEmployee(employee2);
     joinRepository.insertWithEntityManager(phone2);
-    
+
     Phone phone3 = new Phone();
     phone3.setNumber("010-5555-6666");
     phone3.setEmployee(employee2);
@@ -140,5 +140,13 @@ class JoinTest {
         Phone.class);
     List<Phone> resultList = query.getResultList();
     assertEquals(3, resultList.size());
+  }
+
+  @Test
+  public void whenFetchKeywordIsSpecified_ThenCreatesFetchJoin() {
+    TypedQuery<Department> query = entityManager.createQuery(
+        "SELECT d FROM Department d JOIN d.employees", Department.class);
+    List<Department> resultList = query.getResultList();
+    assertEquals(1, resultList.size());
   }
 }
