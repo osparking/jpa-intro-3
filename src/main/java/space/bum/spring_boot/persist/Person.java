@@ -8,6 +8,7 @@ import lombok.Data;
 @Entity
 @Data
 public class Person {
+  
   @Id
   @GeneratedValue
   private Long id;
