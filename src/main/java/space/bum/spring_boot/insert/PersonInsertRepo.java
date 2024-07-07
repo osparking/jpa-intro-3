@@ -13,7 +13,7 @@ public class PersonInsertRepo {
   private EntityManager entityManager;
 
   @Transactional
-  public void insertWithQuery(Person person) {
+  public void insertWithQuery(PersonInsert person) {
     entityManager.createNativeQuery("INSERT INTO person "
         + "(id, first_name, last_name) VALUES (?,?,?)")
         .setParameter(1, person.getId())
@@ -23,7 +23,7 @@ public class PersonInsertRepo {
   }
   
   @Transactional
-  public void insertWithEntityManager(Person person) {
+  public void insertWithEntityManager(PersonInsert person) {
       this.entityManager.persist(person);
   }
 }

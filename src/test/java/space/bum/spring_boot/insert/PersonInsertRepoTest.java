@@ -14,7 +14,7 @@ class PersonInsertRepoTest {
 
   @Test
   public void givenPersonEntity_whenInsertedTwice_thenExceptionIsThrown() {
-    Person person = new Person(1L, "firstname", "lastname");
+    PersonInsert person = new PersonInsert(1L, "firstname", "lastname");
 
     assertThrows(DataIntegrityViolationException.class, () -> {
       personInsertRepo.insertWithQuery(person);
@@ -24,7 +24,7 @@ class PersonInsertRepoTest {
 
   @Test
   public void givenPersonEntity_whenInsertedTwice_thenExceptionExpected() {
-    Person person = new Person(1L, "firstname", "lastname");
+    PersonInsert person = new PersonInsert(1L, "firstname", "lastname");
     assertThrows(DataIntegrityViolationException.class, () -> {
       personInsertRepo.insertWithEntityManager(person);
       personInsertRepo.insertWithEntityManager(person);
