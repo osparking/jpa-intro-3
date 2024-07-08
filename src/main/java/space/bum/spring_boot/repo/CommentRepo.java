@@ -10,7 +10,8 @@ import space.bum.spring_boot.aggre.Comment;
 
 @Repository
 public interface CommentRepo extends JpaRepository<Comment, Integer> {
-  @Query("SELECT c.year, COUNT(c.year) FROM Comment AS c "
+  @Query("SELECT new space.bum.spring_boot.repo.CommentCount("
+      + "c.year, COUNT(c.year)) FROM Comment AS c "
       + "GROUP BY c.year ORDER BY c.year DESC")
-  List<Object[]> countTotalCommentsByYear();
+    List<CommentCount> countTotalCommentsByYearClass();
 }
