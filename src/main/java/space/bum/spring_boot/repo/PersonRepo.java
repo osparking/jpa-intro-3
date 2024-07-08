@@ -31,4 +31,24 @@ public class PersonRepo {
     log.info("merge 후 : {}", person.getId());
     return person;
   }
+
+  private static Person savedPerson = null;
+  
+  @Transactional
+  public Person refreshPerson(Person person) throws InterruptedException {
+    session.persist(person);
+    session.flush();
+    savedPerson = person;
+    Thread.sleep(5000);
+    session.refresh(person);
+    return person;
+  }
+
+  @Transactional
+  public Person changePerson() {
+    savedPerson.setName("새선생님");
+    session.merge(savedPerson);
+    session.flush();    
+    return savedPerson;
+  }
 }
