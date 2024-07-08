@@ -55,5 +55,11 @@ class CommentRepoTest {
     var result = commentRepo.countTotalCommentsByYearInterface();
     assertEquals(2, result.size());
   }
+  
+  @Test
+  void whenSelectUseNativeQuery_thenResultsListOfInterface() {
+    var result = commentRepo.countTotalCommentsByYearNative();
+    assertEquals(2, result.size());
+  }
 
 }
