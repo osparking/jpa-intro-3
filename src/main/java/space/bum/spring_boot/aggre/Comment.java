@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Comment {
   @Id
   private Integer id;
-  private Integer year;
+  private Integer year_written;
   private boolean approved;
   private String content;
   @ManyToOne

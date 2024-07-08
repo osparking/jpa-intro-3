@@ -15,5 +15,5 @@ public class Post {
     private String title;
     private String content;
     @OneToMany(mappedBy = "post")
-    private List comments;
+    private List<Comment> comments;
 }

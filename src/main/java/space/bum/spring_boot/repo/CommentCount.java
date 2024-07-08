@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentCount {
-  private Integer year;
+  private Integer year_written;
   private Long total;
 }
