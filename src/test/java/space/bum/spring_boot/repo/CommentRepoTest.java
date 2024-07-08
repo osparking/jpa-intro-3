@@ -49,5 +49,11 @@ class CommentRepoTest {
     var result = commentRepo.countTotalCommentsByYearClass();
     assertEquals(2, result.size());
   }
+  
+  @Test
+  void whenSelectHasInterfaceMatchingAlias_thenResultsListOfInterface() {
+    var result = commentRepo.countTotalCommentsByYearInterface();
+    assertEquals(2, result.size());
+  }
 
 }
