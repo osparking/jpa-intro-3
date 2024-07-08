@@ -36,4 +36,27 @@ public class PersonController {
     
     return merged;
   }
+  
+  @GetMapping("/change")
+  public Person changePerson() {    
+    Person changed = (Person) personRepo.changePerson();
+    
+    return changed;
+  }
+  
+  @GetMapping("/refresh")
+  public Person refreshPerson() {
+    Person person = new Person(); 
+    
+    person.setName("박진호");
+    
+    Person refreshed = null;
+    try {
+      refreshed = (Person) personRepo.refreshPerson(person);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    
+    return refreshed;
+  }
 }
