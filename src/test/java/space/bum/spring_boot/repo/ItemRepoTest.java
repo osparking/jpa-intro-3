@@ -36,4 +36,9 @@ class ItemRepoTest {
     }
   }
 
+  @Test
+  void findItemsWhenTableEmpty_thenReturnedListSizeIs_4_thenOk() {
+    var result = itemRepo.findItemByColorAndGrade(entityManager);
+    assertEquals(4, result.size());
+  }
 }
