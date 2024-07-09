@@ -14,23 +14,24 @@ import space.bum.spring_boot.criteria.Item;
 class ItemRepoTest {
   @Autowired
   private ItemRepo itemRepo;
-  
+
   @Autowired
   EntityManager entityManager;
 
   @BeforeEach
   /**
    * 항목을 색상, 등급별로 총 6개 정도 저장한다.
+   * 
    * @throws Exception
    */
   void setUp() throws Exception {
-    String[] colors = {"red", "blue", "green"};
-    String[] grades = {"A", "B", "C"};
+    String[] colors = { "red", "blue", "green" };
+    String[] grades = { "A", "B", "C" };
     int idx = 1;
-    
+
     for (String color : colors) {
       for (String grade : grades) {
-        itemRepo.save(new Item((long)idx, color, grade, "항목" + idx));
+        itemRepo.save(new Item((long) idx, color, grade, "항목" + idx));
         idx++;
       }
     }
@@ -40,5 +41,11 @@ class ItemRepoTest {
   void findItemsWhenTableEmpty_thenReturnedListSizeIs_4_thenOk() {
     var result = itemRepo.findItemByColorAndGrade(entityManager);
     assertEquals(4, result.size());
+  }
+
+  @Test
+  void findItemsOfSpecificColorGradeCombo_thenReturnedListSizeIs_2_thenOk() {
+    var result = itemRepo.findItemOfSpecificColorAndGrade(entityManager);
+    assertEquals(2, result.size());
   }
 }
