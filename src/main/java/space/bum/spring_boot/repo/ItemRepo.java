@@ -30,7 +30,12 @@ public interface ItemRepo extends JpaRepository<Item, Long> {
         "B");
     Predicate predicateForGrade = criteriaBuilder.or(predicateForGradeA,
         predicateForGradeB);
+
+    Predicate finalPredicate = criteriaBuilder.and(predicateForColor,
+        predicateForGrade);
     
-    return null;
+    criteriaQuery.where(finalPredicate);
+    
+    return entityManager.createQuery(criteriaQuery).getResultList();
   }
 }
