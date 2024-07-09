@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 
-public class Book {
+public class BookEnt {
   @EmbeddedId
   private BookId bookId;
 
