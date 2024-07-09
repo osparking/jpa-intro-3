@@ -2,6 +2,7 @@ package space.bum.spring_boot.repo;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
@@ -16,6 +17,7 @@ import space.bum.spring_boot.criteria.Book;
 @Repository
 @NoArgsConstructor
 public class BookRepositoryImpl implements BookCustomRepo{
+  @Autowired
   EntityManager em;
 
   public List<Book> findBooksByAuthorNameAndTitle(String authorName, String title) {
