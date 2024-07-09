@@ -15,7 +15,7 @@ import space.bum.spring_boot.criteria.Book;
 
 @Repository
 @NoArgsConstructor
-public class BookRepoImpl implements BookCustomRepo{
+public class BookRepositoryImpl implements BookCustomRepo{
   EntityManager em;
 
   public List<Book> findBooksByAuthorNameAndTitle(String authorName, String title) {
