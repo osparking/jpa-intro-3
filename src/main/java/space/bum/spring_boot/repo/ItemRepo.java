@@ -24,6 +24,13 @@ public interface ItemRepo extends JpaRepository<Item, Long> {
     Predicate predicateForColor = criteriaBuilder.or(predicateForBlueColor,
         predicateForRedColor);
 
+    Predicate predicateForGradeA = criteriaBuilder.equal(itemRoot.get("grade"),
+        "A");
+    Predicate predicateForGradeB = criteriaBuilder.equal(itemRoot.get("grade"),
+        "B");
+    Predicate predicateForGrade = criteriaBuilder.or(predicateForGradeA,
+        predicateForGradeB);
+    
     return null;
   }
 }
