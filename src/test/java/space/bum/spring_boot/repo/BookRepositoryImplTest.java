@@ -42,5 +42,14 @@ class BookRepositoryImplTest {
     var list = bookRepository.findBooksByAuthorNameAndTitle("조정래", "산맥");
     assertEquals(1, list.size());
   }
+  
+  @Test
+  /**
+   * 조정래의 모든 저서를 검색하여 2건이 찾아졌으면 성공이다.
+   */
+  void 만약_조정래의_모든_저서_검색하여_2건이_찾아졌으면_성공() {
+    var list = bookRepository.findBooksByAuthorNameAndTitle("조정래", null);
+    assertEquals(2, list.size());
+  }
 
 }
