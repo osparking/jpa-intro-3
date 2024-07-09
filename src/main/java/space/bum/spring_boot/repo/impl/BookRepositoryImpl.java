@@ -1,9 +1,10 @@
-package space.bum.spring_boot.repo;
+package space.bum.spring_boot.repo.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
@@ -13,6 +14,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.NoArgsConstructor;
 import space.bum.spring_boot.criteria.Book;
+import space.bum.spring_boot.repo.BookCustomRepo;
 
 @Repository
 @NoArgsConstructor
