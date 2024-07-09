@@ -28,6 +28,15 @@ public class BookController {
   }
   
   /**
+   * 서적 검색 메소드 제 1판
+   */
+  public List<Book> findBooksByAuthorTitle(String author, String title) {
+    var list = bookRepository
+        .findAll(hasAuthor(author).and(titleContains(title)));
+    return list;
+  }
+  
+  /**
    * 서적 검색 메소드 제 2판
    */
   public List<Book> findBooksByAuthor(String author) {
