@@ -10,6 +10,7 @@ import static space.bum.spring_boot.repo.impl.Predicate.titleContains;
 
 import space.bum.spring_boot.criteria.Book;
 import space.bum.spring_boot.repo.BookRepository;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 @RestController
 public class BookController {
@@ -32,10 +33,10 @@ public class BookController {
    */
   public List<Book> findBooksByAuthorTitle(String author, String title) {
     var list = bookRepository
-        .findAll(hasAuthor(author).and(titleContains(title)));
+        .findAll(where(hasAuthor(author).and(titleContains(title))));
     return list;
   }
-  
+
   /**
    * 서적 검색 메소드 제 2판
    */
