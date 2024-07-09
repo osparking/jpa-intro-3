@@ -3,11 +3,13 @@ package space.bum.spring_boot.repo;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.criteria.Predicate;
 import space.bum.spring_boot.criteria.Item;
 
+@Repository
 public interface ItemRepo extends JpaRepository<Item, Long> {
 
   public default List<Item> findItemByColorAndGrade(
