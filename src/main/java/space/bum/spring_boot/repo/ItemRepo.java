@@ -35,9 +35,38 @@ public interface ItemRepo extends JpaRepository<Item, Long> {
 
     Predicate finalPredicate = criteriaBuilder.and(predicateForColor,
         predicateForGrade);
-    
+
     criteriaQuery.where(finalPredicate);
+
+    return entityManager.createQuery(criteriaQuery).getResultList();
+  }
+
+  public default List<Item> findItemOfSpecificColorAndGrade(
+      EntityManager entityManager) {
+
+    var criteriaBuilder = entityManager.getCriteriaBuilder();
+    var criteriaQuery = criteriaBuilder.createQuery(Item.class);
+    var itemRoot = criteriaQuery.from(Item.class);
+
+    Predicate predicateForRedColor = criteriaBuilder
+        .equal(itemRoot.get("color"), "red");
+    Predicate predicateForGradeC = criteriaBuilder.equal(itemRoot.get("grade"),
+        "C");  
+    Predicate colorGradeComboPred_1 = criteriaBuilder.and(predicateForRedColor,
+        predicateForGradeC);
     
+    Predicate predicateForBlue = criteriaBuilder
+        .equal(itemRoot.get("color"), "blue");
+    Predicate predicateForGradeB = criteriaBuilder.equal(itemRoot.get("grade"),
+        "B");  
+    Predicate colorGradeComboPred_2 = criteriaBuilder.and(predicateForBlue,
+        predicateForGradeB);
+
+    Predicate finalPredicate = criteriaBuilder.or(colorGradeComboPred_1,
+        colorGradeComboPred_2);
+
+    criteriaQuery.where(finalPredicate);
+
     return entityManager.createQuery(criteriaQuery).getResultList();
   }
 }
